@@ -56,4 +56,13 @@ echo 'top: ' . $stack->top() . '<br>';
  */
 $stack->offsetSet(0, 'ww');
 print_r($stack);
+
+/**
+ * rewind()后,current指向top
+ * 这一点和双向列表不同
+ */
+$stack->rewind();
+//current: ww
+echo 'current: ' . $stack->current() . '<br>';
+
 echo '</pre>';
