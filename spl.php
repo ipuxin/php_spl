@@ -1,11 +1,10 @@
 <?php
-/**
- * 堆栈:
- * 是双向链表的一个分支
- * 许多方法通用
- */
 $stack = new SplStack();
-
+/**
+ * 典型的插包子模型:
+ * 从top()添加数据,push()
+ * 从top()删除数据,pop()
+ */
 $stack->push('a');
 $stack->push('b');
 $stack->push('c');
@@ -27,4 +26,11 @@ while ($stack->valid()) {
     $stack->next();
 }
 
+/**
+ * 删除指针:pop()
+ * 出栈:从top中删除
+ */
+$popObj = $stack->pop();
+echo '$popObj: ' . $popObj . '<br>';
+print_r($stack);
 echo '</pre>';
