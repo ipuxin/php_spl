@@ -1,64 +1,56 @@
 <?php
 /**
- * 迭代器:ArrayIterator
- * 遍历数组
+ * 跳过某些元素打印
  */
 $fruits = [
-    'Apple' => 'apple value',
-    'Orange' => 'orange value',
-    'grape' => 'grape value',
-    'plum' => 'plum value'
+    'Apple' => 'apple value',   //position = 0
+    'Orange' => 'orange value', //position = 1
+    'Grape' => 'grape value',
+    'Plum' => 'plum value'
 ];
 
 echo '<pre>';
-
 print_r($fruits);
 
+$arrIterator = new ArrayObject($fruits);
+$getIter = $arrIterator->getIterator();
+
 /**
- * 普通遍历方法:foreach,
- * 其实,也是使用了ArrayIterator方法
- * Apple : apple value
  * Orange : orange value
- * grape : grape value
- * plum : plum value
+ * Grape : grape value
+ * Plum : plum value
  */
-echo '<hr>使用foreach遍历:<br>';
-foreach ($fruits as $key => $value) {
-    echo $key . ' : ' . $value . "\n";
+echo '<hr>使用ArrayIterator in while(){}跳过第一个元素遍历:<br>';
+$getIter->rewind();
+if ($getIter->valid()) {
+    $getIter->seek(1);
+    while ($getIter->valid()) {
+        echo $getIter->key() . ' : ' . $getIter->current() . "\n";
+        $getIter->next();
+    }
 }
 
 /**
- * 使用ArrayIterator遍历:
  * Apple : apple value
+ * Grape : grape value
  * Orange : orange value
- * grape : grape value
- * plum : plum value
+ * Plum : plum value
  */
-echo '<hr>使用ArrayIterator in foreach(){}遍历:<br>';
-/**
- * 获得数组的迭代器
- */
-$arrIterator = new ArrayObject($fruits);
-$getIter = $arrIterator->getIterator();
-/**
- * 执行循环
- */
+echo '<hr>使用ksort() 对元素的key排序遍历:<br>';
+$getIter->ksort();
 foreach ($getIter as $key => $value) {
     echo $key . ' : ' . $value . "\n";
 }
 
 /**
- * 使用while循环
  * Apple : apple value
+ * Grape : grape value
  * Orange : orange value
- * grape : grape value
- * plum : plum value
+ * Plum : plum value
  */
-$getIter->rewind();
-echo '<hr>使用ArrayIterator in while(){}遍历:<br>';
-while ($getIter->valid()) {
-    echo $getIter->key() . ' : ' . $getIter->current() . "\n";
-    $getIter->next();
+echo '<hr>使用asort() 对元素的value排序遍历:<br>';
+$getIter->asort();
+foreach ($getIter as $key => $value) {
+    echo $key . ' : ' . $value . "\n";
 }
-
 echo '</pre>';
