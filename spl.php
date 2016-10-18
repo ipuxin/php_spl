@@ -1,64 +1,64 @@
 <?php
-$queue = new SplQueue();
-
-$queue->enqueue('a');
-$queue->enqueue('b');
-$queue->enqueue('c');
-$queue->enqueue('d');
-$queue->enqueue('e');
+/**
+ * 迭代器:ArrayIterator
+ * 遍历数组
+ */
+$fruits = [
+    'Apple' => 'apple value',
+    'Orange' => 'orange value',
+    'grape' => 'grape value',
+    'plum' => 'plum value'
+];
 
 echo '<pre>';
-print_r($queue);
+
+print_r($fruits);
 
 /**
- * offsetSet(0,'A');
- * 0,是从根节点开始的
- *
- * current: A
- * 0 => A
- * 1 => b
- * 2 => c
- * 3 => d
- * 4 => e
+ * 普通遍历方法:foreach,
+ * 其实,也是使用了ArrayIterator方法
+ * Apple : apple value
+ * Orange : orange value
+ * grape : grape value
+ * plum : plum value
  */
-$queue->offsetSet(0, 'A');
-
-/**
- * 遍历堆栈
- * current: a
- * 0 => a
- * 1 => b
- * 2 => c
- * 3 => d
- * 4 => e
- *
- * 指针的next()由bottom->top
- */
-$queue->rewind();
-echo 'current: ' . $queue->current() . '<br>';
-while ($queue->valid()) {
-    echo $queue->key() . ' => ' . $queue->current() . '<br>';
-    $queue->next();
+echo '<hr>使用foreach遍历:<br>';
+foreach ($fruits as $key => $value) {
+    echo $key . ' : ' . $value . "\n";
 }
 
 /**
- * dequeue:删除节点
- * 从bottom开始删除:先进,先出
- *
- * SplQueue Object
- * (
- * [flags:SplDoublyLinkedList:private] => 4
- * [dllist:SplDoublyLinkedList:private] => Array
- * (
- * [0] => b
- * [1] => c
- * [2] => d
- * [3] => e
- * )
- *
- * )
+ * 使用ArrayIterator遍历:
+ * Apple : apple value
+ * Orange : orange value
+ * grape : grape value
+ * plum : plum value
  */
-$del = $queue->dequeue();
-echo '$del: ' . $del . '<br>';
-print_r($queue);
+echo '<hr>使用ArrayIterator in foreach(){}遍历:<br>';
+/**
+ * 获得数组的迭代器
+ */
+$arrIterator = new ArrayObject($fruits);
+$getIter = $arrIterator->getIterator();
+/**
+ * 执行循环
+ */
+foreach ($getIter as $key => $value) {
+    echo $key . ' : ' . $value . "\n";
+}
+
+/**
+ * 使用while循环
+ * Apple : apple value
+ * Orange : orange value
+ * grape : grape value
+ * plum : plum value
+ */
+$getIter->rewind();
+echo '<hr>使用ArrayIterator in while(){}遍历:<br>';
+while ($getIter->valid()) {
+    echo $getIter->key() . ' : ' . $getIter->current() . "\n";
+    $getIter->next();
+}
+
 echo '</pre>';
