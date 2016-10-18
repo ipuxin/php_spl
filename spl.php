@@ -1,21 +1,6 @@
 <?php
 $queue = new SplQueue();
-/**
- * 典型的排队买票模型
- * SplQueue Object
- * (
- * [flags:SplDoublyLinkedList:private] => 4
- * [dllist:SplDoublyLinkedList:private] => Array
- * (
- * [0] => a
- * [1] => b
- * [2] => c
- * [3] => d
- * [4] => e
- * )
- *
- * )
- */
+
 $queue->enqueue('a');
 $queue->enqueue('b');
 $queue->enqueue('c');
@@ -26,30 +11,54 @@ echo '<pre>';
 print_r($queue);
 
 /**
- * bottom: a
- * top: e
+ * offsetSet(0,'A');
+ * 0,是从根节点开始的
+ *
+ * current: A
+ * 0 => A
+ * 1 => b
+ * 2 => c
+ * 3 => d
+ * 4 => e
  */
-echo 'bottom: ' . $queue->bottom() . '<br>';
-echo 'top: ' . $queue->top() . '<br>';
+$queue->offsetSet(0, 'A');
 
-
-//遍历堆栈
+/**
+ * 遍历堆栈
+ * current: a
+ * 0 => a
+ * 1 => b
+ * 2 => c
+ * 3 => d
+ * 4 => e
+ *
+ * 指针的next()由bottom->top
+ */
 $queue->rewind();
+echo 'current: ' . $queue->current() . '<br>';
 while ($queue->valid()) {
     echo $queue->key() . ' => ' . $queue->current() . '<br>';
-//    echo '键 key: ' . $stack->key() . '<br>';
-//    echo '值 current: ' . $stack->current() . '<br>';
-    /**
-     * 移动指针
-     */
     $queue->next();
 }
 
 /**
- * 删除指针:pop()
- * 出栈:从top中删除
+ * dequeue:删除节点
+ * 从bottom开始删除:先进,先出
+ *
+ * SplQueue Object
+ * (
+ * [flags:SplDoublyLinkedList:private] => 4
+ * [dllist:SplDoublyLinkedList:private] => Array
+ * (
+ * [0] => b
+ * [1] => c
+ * [2] => d
+ * [3] => e
+ * )
+ *
+ * )
  */
-//$popObj = $queue->pop();
-//echo '$popObj: ' . $popObj . '<br>';
-//print_r($queue);
+$del = $queue->dequeue();
+echo '$del: ' . $del . '<br>';
+print_r($queue);
 echo '</pre>';
