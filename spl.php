@@ -14,10 +14,14 @@ $obj->next();
 
 /**
  * pop():
- *  删除top元素,若,正好current()指向此,则,current为空
+ *  删除top节点,若,正好current()指向此,则,current为空
  */
 $obj->pop();
 
+/**
+ * shift():
+ * 删除bottom节点
+ */
 echo '当前节点:' . $obj->current() . '<br>';
 print_r($obj);
 echo '</pre>';
