@@ -1,6 +1,8 @@
 <?php
 /**
- * 跳过某些元素打印
+ * AppendIterator
+ * 按顺序迭代访问多个迭代器.
+ * 把多个数组放一起循环
  */
 $fruits = [
     'Apple' => 'apple value',   //position = 0
@@ -8,49 +10,39 @@ $fruits = [
     'Grape' => 'grape value',
     'Plum' => 'plum value'
 ];
+$sports = [
+    'football' => 'football value',   //position = 0
+    'basketball' => 'orange value', //position = 1
+    'pingpang' => 'pingpang value'
+];
 
 echo '<pre>';
-print_r($fruits);
 
-$arrIterator = new ArrayObject($fruits);
-$getIter = $arrIterator->getIterator();
+$fruIterator = new ArrayIterator($fruits);
+$spoIterator = new ArrayIterator($sports);
+$joinIterator = new AppendIterator();
+
+$joinIterator->append($fruIterator);
+$joinIterator->append($spoIterator);
 
 /**
- * Orange : orange value
- * Grape : grape value
- * Plum : plum value
+ * AppendIterator Object
+ * (
+ * )
  */
-echo '<hr>使用ArrayIterator in while(){}跳过第一个元素遍历:<br>';
-$getIter->rewind();
-if ($getIter->valid()) {
-    $getIter->seek(1);
-    while ($getIter->valid()) {
-        echo $getIter->key() . ' : ' . $getIter->current() . "\n";
-        $getIter->next();
-    }
-}
+print_r($joinIterator);
 
 /**
  * Apple : apple value
- * Grape : grape value
  * Orange : orange value
+ * Grape : grape value
  * Plum : plum value
+ * football : football value
+ * basketball : orange value
+ * pingpang : pingpang value
  */
-echo '<hr>使用ksort() 对元素的key排序遍历:<br>';
-$getIter->ksort();
-foreach ($getIter as $key => $value) {
+foreach ($joinIterator as $key => $value) {
     echo $key . ' : ' . $value . "\n";
 }
 
-/**
- * Apple : apple value
- * Grape : grape value
- * Orange : orange value
- * Plum : plum value
- */
-echo '<hr>使用asort() 对元素的value排序遍历:<br>';
-$getIter->asort();
-foreach ($getIter as $key => $value) {
-    echo $key . ' : ' . $value . "\n";
-}
 echo '</pre>';
