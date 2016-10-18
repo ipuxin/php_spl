@@ -1,8 +1,4 @@
 <?php
-/**
- * 双向链表
- */
-
 $obj = new SplDoublyLinkedList();
 echo '<pre>';
 
@@ -16,10 +12,31 @@ print_r($obj);
  * 使用rewind后current才有指向
  */
 $obj->rewind();
-
+$obj->next();
 /**
  * 当前节点:10
+ * 如果到达最后一个,$obj->currrent()为空
  */
-echo '当前节点:' . $obj->current();
+echo '当前节点:' . $obj->current() . '<br>';
+$obj->next();
+$obj->next();
+$obj->next();
+$obj->next();
 
+if ($obj->current()) {
+    echo "Current node valid\n";
+} else {
+    echo "Current node invalid\n";
+}
+
+/**
+ * 下面这个和current作用一样
+ */
+if ($obj->valid()) {
+    echo "Current node valid\n";
+} else {
+    echo "Current node invalid\n";
+}
+
+echo '当前节点:' . $obj->current() . '<br>';
 echo '</pre>';
