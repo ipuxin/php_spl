@@ -65,4 +65,10 @@ $stack->rewind();
 //current: ww
 echo 'current: ' . $stack->current() . '<br>';
 
+/**
+ * 在top位置,执行next(),指针会从top移动向bottom.
+ */
+$stack->next();
+//current: d
+echo 'current: ' . $stack->current() . '<br>';
 echo '</pre>';
