@@ -1,28 +1,26 @@
 <?php
 date_default_timezone_set('PRC');
+
+$people = [
+    [
+        'people1' => '张三',   //position = 0
+        'people2' => '李四', //position = 1
+        'people3' => '王二',
+        'people4' => '王二是',
+    ],
+    [
+        'Apple' => 'apple value',   //position = 0
+        'Orange' => 'orange value', //position = 1
+        'Grape' => 'grape value',
+    ],
+];
+
 /**
- * . 当前目录
- * .. 上一级目录
+ * 计算数组的长度
  */
-
-
-/**
- * %s : 字符串
- * \t : 制表符
- * %8s : 设定宽度为8
- */
-$it = new FilesystemIterator('.');
-foreach ($it as $finfo) {
-    echo '<br>';
-    printf(
-        "%s\t%s\t%8s\t%s\n",
-        date('Y-m-d H:i:s', $finfo->getMTime()),
-        $finfo->isDir() ? "<DIR>" : "",
-
-        /**
-         * 格式化数字
-         */
-        number_format($finfo->getSize()),
-        $finfo->getFileName()
-    );
-}
+//2
+echo count($people) . "\n";
+//4
+echo count($people[0]) . "\n";
+//3
+echo count($people[1]) . "\n";
