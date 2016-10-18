@@ -1,36 +1,47 @@
 <?php
-$stack = new SplStack();
+$queue = new SplQueue();
 /**
- * 典型的插包子模型:
- * 从top()添加数据,push()
- * 从top()删除数据,pop()
+ * 典型的排队买票模型
+ * SplQueue Object
+ * (
+ * [flags:SplDoublyLinkedList:private] => 4
+ * [dllist:SplDoublyLinkedList:private] => Array
+ * (
+ * [0] => a
+ * [1] => b
+ * [2] => c
+ * [3] => d
+ * [4] => e
+ * )
+ *
+ * )
  */
-$stack->push('a');
-$stack->push('b');
-$stack->push('c');
-$stack->push('d');
-$stack->push('e');
+$queue->enqueue('a');
+$queue->enqueue('b');
+$queue->enqueue('c');
+$queue->enqueue('d');
+$queue->enqueue('e');
 
 echo '<pre>';
-print_r($stack);
+print_r($queue);
 
 //遍历堆栈
-$stack->rewind();
-while ($stack->valid()) {
-    echo $stack->key() . ' => ' . $stack->current() . '<br>';
+$queue->rewind();
+while ($queue->valid()) {
+    echo $queue->key() . ' => ' . $queue->current() . '<br>';
 //    echo '键 key: ' . $stack->key() . '<br>';
 //    echo '值 current: ' . $stack->current() . '<br>';
     /**
      * 移动指针
      */
-    $stack->next();
+    $queue->next();
 }
 
 /**
  * 删除指针:pop()
  * 出栈:从top中删除
  */
-$popObj = $stack->pop();
-echo '$popObj: ' . $popObj . '<br>';
-print_r($stack);
+//$popObj = $queue->pop();
+//echo '$popObj: ' . $popObj . '<br>';
+//print_r($queue);
 echo '</pre>';
