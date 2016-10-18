@@ -1,27 +1,32 @@
 <?php
-$obj = new SplDoublyLinkedList();
+/**
+ * 堆栈
+ */
+$stack = new SplStack();
+
+$stack->push('a');
+$stack->push('b');
+$stack->push('c');
+$stack->push('d');
+$stack->push('e');
+
 echo '<pre>';
 
-$obj->push(1);
-$obj->push(2);
-$obj->push(3);
-$obj->unshift(10);
-echo '当前节点:' . $obj->current() . '<br>';
-$obj->rewind();
-$obj->next();
-$obj->next();
-$obj->next();
-
 /**
- * pop():
- *  删除top节点,若,正好current()指向此,则,current为空
+ * SplStack Object
+ * (
+ * [flags:SplDoublyLinkedList:private] => 6
+ * [dllist:SplDoublyLinkedList:private] => Array
+ * (
+ * [0] => a
+ * [1] => b
+ * [2] => c
+ * [3] => d
+ * [4] => e
+ * )
+ *
+ * )
  */
-$obj->pop();
+print_r($stack);
 
-/**
- * shift():
- * 删除bottom节点
- */
-echo '当前节点:' . $obj->current() . '<br>';
-print_r($obj);
 echo '</pre>';
