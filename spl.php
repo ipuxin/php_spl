@@ -25,6 +25,14 @@ $queue->enqueue('e');
 echo '<pre>';
 print_r($queue);
 
+/**
+ * bottom: a
+ * top: e
+ */
+echo 'bottom: ' . $queue->bottom() . '<br>';
+echo 'top: ' . $queue->top() . '<br>';
+
+
 //遍历堆栈
 $queue->rewind();
 while ($queue->valid()) {
