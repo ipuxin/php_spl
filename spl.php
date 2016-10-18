@@ -18,9 +18,11 @@ foreach ($it as $finfo) {
         "%s\t%s\t%8s\t%s\n",
         date('Y-m-d H:i:s', $finfo->getMTime()),
         $finfo->isDir() ? "<DIR>" : "",
+
+        /**
+         * 格式化数字
+         */
         number_format($finfo->getSize()),
         $finfo->getFileName()
     );
-
-//    echo date('Y-m-d H:i:s', $finfo->getMTime()) . "\n";
 }
