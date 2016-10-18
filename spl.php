@@ -6,37 +6,18 @@ $obj->push(1);
 $obj->push(2);
 $obj->push(3);
 $obj->unshift(10);
-print_r($obj);
-
-/**
- * 使用rewind后current才有指向
- */
+echo '当前节点:' . $obj->current() . '<br>';
 $obj->rewind();
 $obj->next();
-/**
- * 当前节点:10
- * 如果到达最后一个,$obj->currrent()为空
- */
-echo '当前节点:' . $obj->current() . '<br>';
 $obj->next();
 $obj->next();
-$obj->next();
-$obj->next();
-
-if ($obj->current()) {
-    echo "Current node valid\n";
-} else {
-    echo "Current node invalid\n";
-}
 
 /**
- * 下面这个和current作用一样
+ * pop():
+ *  删除top元素,若,正好current()指向此,则,current为空
  */
-if ($obj->valid()) {
-    echo "Current node valid\n";
-} else {
-    echo "Current node invalid\n";
-}
+$obj->pop();
 
 echo '当前节点:' . $obj->current() . '<br>';
+print_r($obj);
 echo '</pre>';
