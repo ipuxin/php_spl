@@ -13,62 +13,18 @@ $stack->push('d');
 $stack->push('e');
 
 echo '<pre>';
-
-/**
- * SplStack Object
- * (
- * [flags:SplDoublyLinkedList:private] => 6
- * [dllist:SplDoublyLinkedList:private] => Array
- * (
- * [0] => a
- * [1] => b
- * [2] => c
- * [3] => d
- * [4] => e
- * )
- *
- * )
- */
 print_r($stack);
 
-/**
- * bottom: a
- * top: e
- */
-echo 'bottom: ' . $stack->bottom() . '<br>';
-echo 'top: ' . $stack->top() . '<br>';
-
-/**
- * SplStack Object
- * (
- * [flags:SplDoublyLinkedList:private] => 6
- * [dllist:SplDoublyLinkedList:private] => Array
- * (
- * [0] => a
- * [1] => b
- * [2] => c
- * [3] => d
- * [4] => ww
- * )
- *
- * )
- * offsetSet(),中0,是top
- */
-$stack->offsetSet(0, 'ww');
-print_r($stack);
-
-/**
- * rewind()后,current指向top
- * 这一点和双向列表不同
- */
+//遍历堆栈
 $stack->rewind();
-//current: ww
-echo 'current: ' . $stack->current() . '<br>';
+while ($stack->valid()) {
+    echo $stack->key() . ' => ' . $stack->current() . '<br>';
+//    echo '键 key: ' . $stack->key() . '<br>';
+//    echo '值 current: ' . $stack->current() . '<br>';
+    /**
+     * 移动指针
+     */
+    $stack->next();
+}
 
-/**
- * 在top位置,执行next(),指针会从top移动向bottom.
- */
-$stack->next();
-//current: d
-echo 'current: ' . $stack->current() . '<br>';
 echo '</pre>';
